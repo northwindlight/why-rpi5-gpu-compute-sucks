@@ -277,3 +277,8 @@ data/
   counters-clpeak-control.txt                      含 2.0014（标定参照）
   counters-llamacpp.txt
 ```
+
+## License
+
+MIT —— 见 [LICENSE](LICENSE)。数据与文字随便用，能注明出处更好；
+如果这些测量帮你省了几天，或者你发现了本文的错误，欢迎开 issue。
