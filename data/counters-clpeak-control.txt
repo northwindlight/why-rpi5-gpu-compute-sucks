@@ -1,0 +1,26 @@
+采样窗口: 25.98 s   采样点/计数器: 25600~25600
+得到计数器: L2T-total-cache-hit, L2T-total-cache-miss, QPU-total-instr-cache-hit, QPU-total-instr-cache-miss, TMU-active-cycles, TMU-stalled-cycles, compute-active-cycles, core-active, cycle-count
+
+计数器                                         增量   /cycle-count
+cycle-count (总周期)                   13,978,146          1.000
+L2T-total-cache-hit                     21,411         0.0015
+L2T-total-cache-miss                     3,064         0.0002
+QPU-total-instr-cache-hit           27,975,330         2.0014
+QPU-total-instr-cache-miss                 774         0.0001
+TMU-active-cycles                       47,632         0.0034
+TMU-stalled-cycles                      11,808         0.0008
+compute-active-cycles               13,959,105         0.9986
+core-active                         13,961,004         0.9988
+
+=== 关键比值 ===
+  compute-active-cycles / cycle-count =  99.86 %   ← ★compute 单元真正活跃的周期占比
+  core-active-cycles    / cycle-count =  99.88 %
+  TMU-active-cycles     / cycle-count =   0.34 %
+  TMU-stalled-cycles    / cycle-count =   0.08 %
+  L2T 命中率 =  87.48 %  (hit=21,411.0 miss=3,064.0)
+
+=== QPU 指令取指 ===
+  instr-cache 命中/未命中 = 27,975,330 / 774  (命中率 100.00 %)
+  取指总数 / cycle-count = 2.0014   ← 近似「每周期取指次数」(V3D 7.1 有 2 个 QPU，理论上限 2/周期)
+  注：instr-cache 计数可能按 cache line 而非按指令计，绝对值存疑；
+      但数量级足以区分「每周期都在取指」和「几百周期才取一条」。
