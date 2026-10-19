@@ -1,0 +1,124 @@
+Pi 5 NUMA read-only inspection, 2026-10-19 (Asia/Shanghai).
+No configuration changes, reboot, or performance comparison.
+
+$ uname -srvm
+Linux 6.18.50+rpt-rpi-2712 #1 SMP PREEMPT Debian 1:6.18.50-1+rpt1 (2026-09-11) aarch64
+
+$ lscpu
+Architecture:                            aarch64
+CPU op-mode(s):                          32-bit, 64-bit
+Byte Order:                              Little Endian
+CPU(s):                                  4
+On-line CPU(s) list:                     0-3
+Vendor ID:                               ARM
+Model name:                              Cortex-A76
+Model:                                   1
+Thread(s) per core:                      1
+Core(s) per cluster:                     4
+Socket(s):                               -
+Cluster(s):                              1
+Stepping:                                r4p1
+Frequency boost:                         disabled
+CPU(s) scaling MHz:                      100%
+CPU max MHz:                             2800.0000
+CPU min MHz:                             1500.0000
+BogoMIPS:                                108.00
+Flags:                                   fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp
+L1d cache:                               256 KiB (4 instances)
+L1i cache:                               256 KiB (4 instances)
+L2 cache:                                2 MiB (4 instances)
+L3 cache:                                2 MiB (1 instance)
+NUMA node(s):                            8
+NUMA node0 CPU(s):                       0-3
+NUMA node1 CPU(s):                       0-3
+NUMA node2 CPU(s):                       0-3
+NUMA node3 CPU(s):                       0-3
+NUMA node4 CPU(s):                       0-3
+NUMA node5 CPU(s):                       0-3
+NUMA node6 CPU(s):                       0-3
+NUMA node7 CPU(s):                       0-3
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Old microcode:             Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Not affected
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; CSV2, BHB
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Not affected
+
+$ numactl --hardware
+available: 8 nodes (0-7)
+node 0 cpus: 0 1 2 3
+node 0 size: 2011 MB
+node 0 free: 654 MB
+node 1 cpus: 0 1 2 3
+node 1 size: 1975 MB
+node 1 free: 371 MB
+node 2 cpus: 0 1 2 3
+node 2 size: 2039 MB
+node 2 free: 348 MB
+node 3 cpus: 0 1 2 3
+node 3 size: 2039 MB
+node 3 free: 397 MB
+node 4 cpus: 0 1 2 3
+node 4 size: 2039 MB
+node 4 free: 687 MB
+node 5 cpus: 0 1 2 3
+node 5 size: 2039 MB
+node 5 free: 723 MB
+node 6 cpus: 0 1 2 3
+node 6 size: 2039 MB
+node 6 free: 736 MB
+node 7 cpus: 0 1 2 3
+node 7 size: 2030 MB
+node 7 free: 529 MB
+node distances:
+node     0    1    2    3    4    5    6    7
+   0:   10   10   10   10   10   10   10   10
+   1:   10   10   10   10   10   10   10   10
+   2:   10   10   10   10   10   10   10   10
+   3:   10   10   10   10   10   10   10   10
+   4:   10   10   10   10   10   10   10   10
+   5:   10   10   10   10   10   10   10   10
+   6:   10   10   10   10   10   10   10   10
+   7:   10   10   10   10   10   10   10   10
+
+$ numactl --show
+policy: interleave
+preferred node: 2 (interleave next)
+interleavemask: 0 1 2 3 4 5 6 7
+interleavenode: 2
+physcpubind: 0 1 2 3
+cpubind: 0 1 2 3 4 5 6 7
+nodebind: 0 1 2 3 4 5 6 7
+membind: 0 1 2 3 4 5 6 7
+preferred: 0 1 2 3 4 5 6 7
+
+$ journalctl -k -b --no-pager -g NUMA default policy
+Oct 17 03:30:34 rpi kernel: mempolicy: NUMA default policy overridden to 'interleave:0-7'
+Oct 17 03:30:34 rpi kernel: DMA IOMMU NUMA default policy overridden to 'interleave:0-7'
+
+/proc/cmdline, relevant arguments only:
+numa_policy=interleave numa=fake=8 iommu_dma_numa_policy=interleave
+
+NUMA-related arguments in /boot/firmware/cmdline.txt:
+(none)
+
+Relevant kernel configuration:
+# CONFIG_NUMA_BALANCING is not set
+CONFIG_ARM64_16K_PAGES=y
+CONFIG_NUMA=y
+CONFIG_NODES_SHIFT=4
+CONFIG_NUMA_MEMBLKS=y
+CONFIG_NUMA_EMU=y

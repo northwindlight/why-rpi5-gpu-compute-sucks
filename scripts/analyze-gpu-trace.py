@@ -4,8 +4,8 @@
 用法: analyze-gpu-trace.py <csv>
 
 CSV 每行: frame,batch,time_ns,event[,k=v,...]
-时间戳是 CPU 的 CLOCK_MONOTONIC(纳秒)；v3d 没有自由运行的 GPU 时钟，
-所以这是内核在提交/完成时取的 CPU 时钟样本 —— 即「job 在内核眼里的起止」。
+时间戳来自驱动的软件时间戳路径。这里只统计记录窗口；
+窗口可包含同步、调度和采样边界延迟，不能直接等同 GPU 硬件忙碌时间。
 """
 import sys
 from collections import defaultdict
@@ -76,7 +76,7 @@ def main():
         print(f"{k:22s}{len(ds):6d}{s/1e6:12.1f}{s/span*100:8.1f}%"
               f"{s/len(ds)/1e3:10.1f}{max(ds)/1e6:10.2f}")
 
-    # 同一队列内的 job 不重叠，但不同类型可能重叠 → 求区间并集得"GPU 真忙"时间
+    # 求记录窗口的区间并集；这些窗口并不等于 GPU 纯执行区间。
     iv = sorted((j["ts"], j["ts"] + j["dur_ns"]) for j in jobs)
     merged = []
     for a, b in iv:
@@ -87,12 +87,13 @@ def main():
     busy = sum(b - a for a, b in merged)
     gaps = sum(a2 - b1 for (_, b1), (a2, _) in zip(merged, merged[1:]))
 
-    print(f"\n=== GPU 占用 ===")
+    print(f"\n=== 软件记录窗口覆盖 ===")
+    print("  注意：窗口并集不能证明 GPU 满载，也不能排除提交、同步和访存开销。")
     print(f"  trace 跨度(首个事件→末个事件) : {span/1e6:10.1f} ms")
     print(f"  job 时长之和(会重复计重叠)    : {total_busy/1e6:10.1f} ms")
-    print(f"  job 区间并集(GPU 真忙)        : {busy/1e6:10.1f} ms")
-    print(f"  → GPU 忙占比 / 跨度           : {busy/span*100:9.1f} %")
-    print(f"  job 之间的空隙合计            : {gaps/1e6:10.1f} ms  "
+    print(f"  记录窗口并集（非硬件占用）        : {busy/1e6:10.1f} ms")
+    print(f"  → 记录窗口并集 / 跨度           : {busy/span*100:9.1f} %")
+    print(f"  记录窗口之间的空隙合计            : {gaps/1e6:10.1f} ms  "
           f"({gaps/span*100:.1f}%)")
     if merged:
         print(f"  空隙个数                      : {len(merged)-1}")
