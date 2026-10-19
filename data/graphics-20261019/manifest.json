@@ -1,0 +1,249 @@
+{
+  "started": "2026-10-19 11:22:59 +0800",
+  "uname": "6.18.50+rpt-rpi-2712",
+  "glmark2_commit": "22c527cb0556f3a1ac4445aaa52cc532760928d5",
+  "vkmark": "Debian 2025.01-1",
+  "rendering": "headless/offscreen; no display output; no forced frequency",
+  "environment": {
+    "EGL_PLATFORM": "surfaceless",
+    "VK_DRIVER_FILES": "/usr/local/share/vulkan/icd.d/broadcom_icd.aarch64.json",
+    "LD_LIBRARY_PATH": "/home/northwind/graphics-lab/local/usr/lib/aarch64-linux-gnu:"
+  },
+  "commands": [
+    {
+      "name": "vk-warmup",
+      "argv": [
+        "/home/northwind/graphics-lab/local/usr/bin/vkmark",
+        "--winsys-dir",
+        "/home/northwind/graphics-lab/local/usr/lib/aarch64-linux-gnu/vkmark",
+        "--data-dir",
+        "/home/northwind/graphics-lab/local/usr/share/vkmark",
+        "--winsys",
+        "headless",
+        "--size",
+        "800x600",
+        "-b",
+        "cube:duration=0.5"
+      ],
+      "start": 1792380179.8004339,
+      "end": 1792380179.8207262,
+      "returncode": -11
+    },
+    {
+      "name": "gles-validation",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-es2-null",
+        "--off-screen",
+        "--off-screen=1",
+        "--size",
+        "800x600",
+        "--validate",
+        "-b",
+        "build:use-vbo=true",
+        "-b",
+        "texture:texture-filter=linear",
+        "-b",
+        "shading:shading=phong"
+      ],
+      "start": 1792380179.8210654,
+      "end": 1792380179.901827,
+      "returncode": 0
+    },
+    {
+      "name": "desktop-gl-validation",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-null",
+        "--off-screen",
+        "--off-screen=1",
+        "--size",
+        "800x600",
+        "--validate",
+        "-b",
+        "build:use-vbo=true",
+        "-b",
+        "texture:texture-filter=linear",
+        "-b",
+        "shading:shading=phong"
+      ],
+      "start": 1792380179.9021478,
+      "end": 1792380180.028246,
+      "returncode": 0
+    },
+    {
+      "name": "gles-800x600-round1",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-es2-null",
+        "--off-screen",
+        "--size",
+        "800x600",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380180.028641,
+      "end": 1792380190.1819446,
+      "returncode": 0
+    },
+    {
+      "name": "desktop-gl-800x600-round1",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-null",
+        "--off-screen",
+        "--size",
+        "800x600",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380190.1823542,
+      "end": 1792380200.3564746,
+      "returncode": 0
+    },
+    {
+      "name": "gles-1920x1080-round1",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-es2-null",
+        "--off-screen",
+        "--size",
+        "1920x1080",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380200.3568704,
+      "end": 1792380210.6226027,
+      "returncode": 0
+    },
+    {
+      "name": "desktop-gl-1920x1080-round1",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-null",
+        "--off-screen",
+        "--size",
+        "1920x1080",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380210.6230073,
+      "end": 1792380220.8650613,
+      "returncode": 0
+    },
+    {
+      "name": "gles-800x600-round2",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-es2-null",
+        "--off-screen",
+        "--size",
+        "800x600",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380220.865591,
+      "end": 1792380231.0165431,
+      "returncode": 0
+    },
+    {
+      "name": "desktop-gl-800x600-round2",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-null",
+        "--off-screen",
+        "--size",
+        "800x600",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380231.0169475,
+      "end": 1792380241.1785038,
+      "returncode": 0
+    },
+    {
+      "name": "gles-1920x1080-round2",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-es2-null",
+        "--off-screen",
+        "--size",
+        "1920x1080",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380241.1789339,
+      "end": 1792380251.4190133,
+      "returncode": 0
+    },
+    {
+      "name": "desktop-gl-1920x1080-round2",
+      "argv": [
+        "/home/northwind/graphics-lab/glmark2/build/src/glmark2-null",
+        "--off-screen",
+        "--size",
+        "1920x1080",
+        "-b",
+        "build:use-vbo=true:duration=2.0",
+        "-b",
+        "texture:texture-filter=linear:duration=2.0",
+        "-b",
+        "shading:shading=phong:duration=2.0",
+        "-b",
+        "effect2d:duration=2.0",
+        "-b",
+        "desktop:windows=4:effect=blur:duration=2.0"
+      ],
+      "start": 1792380251.419515,
+      "end": 1792380261.6667538,
+      "returncode": 0
+    }
+  ]
+}

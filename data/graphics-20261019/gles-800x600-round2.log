@@ -1,0 +1,18 @@
+=======================================================
+    glmark2 2023.01
+=======================================================
+    OpenGL Information
+    GL_VENDOR:      Broadcom
+    GL_RENDERER:    V3D 7.1.10.2
+    GL_VERSION:     OpenGL ES 3.1 Mesa 26.3.0-devel (git-a5d39a4b74)
+    Surface Config: buf=32 r=8 g=8 b=8 a=8 depth=32 stencil=0 samples=0
+    Surface Size:   800x600 windowed
+=======================================================
+[build] duration=2.0:use-vbo=true: FPS: 1469 FrameTime: 0.681 ms
+[texture] duration=2.0:texture-filter=linear: FPS: 1282 FrameTime: 0.780 ms
+[shading] duration=2.0:shading=phong: FPS: 1243 FrameTime: 0.805 ms
+[effect2d] duration=2.0: FPS: 1194 FrameTime: 0.838 ms
+[desktop] duration=2.0:effect=blur:windows=4: FPS: 341 FrameTime: 2.937 ms
+=======================================================
+                                  glmark2 Score: 1104 
+=======================================================
